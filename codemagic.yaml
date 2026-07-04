@@ -1,4 +1,4 @@
-# VERSÃO: v28
+# VERSÃO: v29
 # Universidade de Líderes — TestFlight interno (iPhone físico)
 #
 # Pré-requisitos configurados no Codemagic:
@@ -6,7 +6,7 @@
 #    Codemagic Lokally
 # 2. Grupo de variáveis seguro com o nome:
 #    universidade_lideres_testflight
-# 3. Dentro do grupo, crie APP_STORE_APPLE_ID com o Apple ID numérico
+# 3. Dentro do grupo, APP_STORE_APPLE_ID com o Apple ID numérico
 #    do registro do app no App Store Connect.
 #
 # Não coloque certificados, chaves .p8, senhas ou IDs sensíveis neste arquivo.
@@ -53,12 +53,8 @@ workflows:
 
       - name: Gerar IPA para TestFlight
         script: |
-          BUILD_NUMBER=$((
-            $(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID") + 1
-          ))
-
           flutter build ipa --release \
-            --build-number="$BUILD_NUMBER" \
+            --build-number="$PROJECT_BUILD_NUMBER" \
             --export-options-plist=/Users/builder/export_options.plist
 
     artifacts:
