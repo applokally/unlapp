@@ -1,4 +1,4 @@
-# VERSÃO: v30
+# VERSÃO: v31
 # Universidade de Líderes — TestFlight interno (iPhone físico)
 #
 # Pré-requisitos configurados no Codemagic:
@@ -22,7 +22,7 @@ workflows:
 
     environment:
       flutter: 3.38.7
-      xcode: 16.4
+      xcode: 26.6
       cocoapods: default
 
       groups:
