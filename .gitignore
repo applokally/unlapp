@@ -1,0 +1,101 @@
+# VERSÃO: v30
+# Universidade de Líderes — arquivos locais, temporários e gerados
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+*.swo
+*.swn
+*.tmp
+*.temp
+*.bak
+*.orig
+.DS_Store
+Thumbs.db
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# Capturas locais geradas durante desenvolvimento
+/flutter_*.png
+
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+# Mantém configurações úteis do projeto quando existirem.
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+
+# Flutter / Dart / Pub
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/coverage/
+/build/
+
+# Symbolication / obfuscation
+app.*.symbols
+app.*.map.json
+
+# Android local / generated
+/android/.gradle/
+/android/app/build/
+/android/build/
+/android/captures/
+/android/.cxx/
+/android/local.properties
+/android/key.properties
+*.jks
+*.keystore
+
+# iOS local / generated
+/ios/Pods/
+/ios/.symlinks/
+/ios/Flutter/ephemeral/
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/flutter_export_environment.sh
+/ios/Flutter/Flutter.podspec
+/ios/Runner.xcworkspace/xcuserdata/
+/ios/Runner.xcodeproj/xcuserdata/
+/ios/DerivedData/
+/ios/build/
+*.xcuserstate
+
+# macOS, Windows and Linux generated
+/macos/Flutter/ephemeral/
+/macos/Pods/
+/macos/Runner.xcworkspace/xcuserdata/
+/macos/Runner.xcodeproj/xcuserdata/
+/windows/flutter/ephemeral/
+/linux/flutter/ephemeral/
+
+# Distribution artifacts
+*.apk
+*.aab
+*.ipa
+*.xcarchive
+
+# Local environment and sensitive files
+.env
+.env.*
+!.env.example
+*.p12
+*.mobileprovision

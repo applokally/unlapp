@@ -1,0 +1,76 @@
+# VERSÃO: v27
+# Universidade de Líderes — TestFlight interno (iPhone físico)
+#
+# Pré-requisitos configurados no Codemagic:
+# 1. Integração App Store Connect com o nome:
+#    universidade_lideres_app_store_connect
+# 2. Grupo de variáveis seguro com o nome:
+#    universidade_lideres_testflight
+# 3. Dentro do grupo, crie APP_STORE_APPLE_ID com o Apple ID numérico
+#    do registro do app no App Store Connect.
+#
+# Não coloque certificados, chaves .p8, senhas ou IDs sensíveis neste arquivo.
+
+workflows:
+  ios-testflight-internal:
+    name: Universidade de Líderes — TestFlight interno
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+
+    integrations:
+      app_store_connect: universidade_lideres_app_store_connect
+
+    environment:
+      flutter: 3.38.7
+      xcode: 16.4
+      cocoapods: default
+
+      groups:
+        - universidade_lideres_testflight
+
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: br.com.universidadedelideres.universidadeLideresApp
+
+    scripts:
+      - name: Configurar assinatura iOS para TestFlight interno
+        script: |
+          xcode-project use-profiles             --custom-export-options='{"testFlightInternalTestingOnly": true}'
+
+      - name: Instalar dependências Flutter
+        script: flutter pub get
+
+      - name: Instalar dependências iOS
+        script: |
+          find ios -name "Podfile" -execdir pod install \;
+
+      - name: Analisar projeto Flutter
+        script: flutter analyze
+
+      - name: Executar testes Flutter
+        script: flutter test
+
+      - name: Gerar IPA para TestFlight
+        script: |
+          BUILD_NUMBER=$((
+            $(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID") + 1
+          ))
+
+          flutter build ipa --release             --build-number="$BUILD_NUMBER"             --export-options-plist=/Users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      email:
+        recipients:
+          - applokally@gmail.com
+        notify:
+          success: true
+          failure: true
+
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: false
+        submit_to_app_store: false

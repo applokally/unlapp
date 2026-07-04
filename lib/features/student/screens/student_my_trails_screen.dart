@@ -1,0 +1,1007 @@
+import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../core/theme/unl_colors.dart';
+import '../widgets/student_app_shell.dart';
+
+const Color _myTrailsBackground = Color(0xFF050609);
+const String _myTrailsWebsiteBaseUrl =
+    'https://www.universidadedelideres.com.br';
+
+enum _MyTrailsTab { inProgress, favorites }
+
+class StudentMyTrailsScreen extends StatefulWidget {
+  const StudentMyTrailsScreen({super.key});
+
+  static const String routeName = '/student-my-trails';
+
+  @override
+  State<StudentMyTrailsScreen> createState() => _StudentMyTrailsScreenState();
+}
+
+class _StudentMyTrailsScreenState extends State<StudentMyTrailsScreen> {
+  final ScrollController _scrollController = ScrollController();
+
+  List<_StudentMyTrail> _startedTrails = const [];
+  List<_StudentMyTrail> _favoriteTrails = const [];
+  _MyTrailsTab _activeTab = _MyTrailsTab.inProgress;
+  bool _isLoading = true;
+  String? _loadError;
+
+  SupabaseClient get _supabase => Supabase.instance.client;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMyTrails();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadMyTrails() async {
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+        _loadError = null;
+      });
+    }
+
+    try {
+      final user = _supabase.auth.currentUser;
+
+      if (user == null) {
+        throw StateError('student_not_authenticated');
+      }
+
+      final results = await Future.wait<List<_StudentMyTrail>>([
+        _fetchStartedTrails(user.id),
+        _fetchFavoriteTrails(user.id),
+      ]);
+
+      if (!mounted) return;
+
+      setState(() {
+        _startedTrails = results[0];
+        _favoriteTrails = results[1];
+        _isLoading = false;
+        _loadError = null;
+      });
+    } catch (_) {
+      if (!mounted) return;
+
+      setState(() {
+        _isLoading = false;
+        _loadError = 'Não foi possível carregar suas trilhas agora.';
+      });
+    }
+  }
+
+  Future<List<_StudentMyTrail>> _fetchStartedTrails(String studentId) async {
+    final dynamic progressResponse = await _supabase
+        .from('lesson_progress')
+        .select('lesson_id,completed_at,last_watched_at,updated_at')
+        .eq('student_id', studentId)
+        .order('updated_at', ascending: false)
+        .limit(1000);
+
+    final progressRows = _rows(progressResponse);
+    final startedLessonIds = progressRows
+        .map((row) => _text(row['lesson_id']))
+        .whereType<String>()
+        .toSet()
+        .toList(growable: false);
+
+    if (startedLessonIds.isEmpty) return const [];
+
+    final dynamic startedLessonsResponse = await _supabase
+        .from('lessons')
+        .select('id,module_id,status')
+        .inFilter('id', startedLessonIds)
+        .eq('status', 'published');
+
+    final startedLessonRows = _rows(startedLessonsResponse);
+    final startedModuleIds = startedLessonRows
+        .map((row) => _text(row['module_id']))
+        .whereType<String>()
+        .toSet()
+        .toList(growable: false);
+
+    if (startedModuleIds.isEmpty) return const [];
+
+    final dynamic startedModulesResponse = await _supabase
+        .from('course_modules')
+        .select('id,course_id,status')
+        .inFilter('id', startedModuleIds)
+        .eq('status', 'published');
+
+    final startedModuleRows = _rows(startedModulesResponse);
+    final startedCourseIds = startedModuleRows
+        .map((row) => _text(row['course_id']))
+        .whereType<String>()
+        .toSet()
+        .toList(growable: false);
+
+    if (startedCourseIds.isEmpty) return const [];
+
+    final dynamic startedMapsResponse = await _supabase
+        .from('course_category_map')
+        .select('course_id,category_id')
+        .inFilter('course_id', startedCourseIds);
+
+    final startedMapRows = _rows(startedMapsResponse);
+    final startedTrailIds = startedMapRows
+        .map((row) => _text(row['category_id']))
+        .whereType<String>()
+        .toSet()
+        .toList(growable: false);
+
+    if (startedTrailIds.isEmpty) return const [];
+
+    final results = await Future.wait<dynamic>([
+      _supabase
+          .from('course_categories')
+          .select(
+            'id,title,description,cover_path,cover_vertical_path,'
+            'cover_horizontal_path,cover_featured_path',
+          )
+          .inFilter('id', startedTrailIds),
+      _supabase
+          .from('course_category_map')
+          .select('course_id,category_id')
+          .inFilter('category_id', startedTrailIds),
+    ]);
+
+    final trailRows = _rows(results[0]);
+    final allTrailMapRows = _rows(results[1]);
+    final allTrailCourseIds = allTrailMapRows
+        .map((row) => _text(row['course_id']))
+        .whereType<String>()
+        .toSet()
+        .toList(growable: false);
+
+    if (allTrailCourseIds.isEmpty) return const [];
+
+    final publishedCoursesResponse = await _supabase
+        .from('courses')
+        .select('id,status')
+        .inFilter('id', allTrailCourseIds)
+        .eq('status', 'published');
+
+    final publishedCourseIds = _rows(
+      publishedCoursesResponse,
+    ).map((row) => _text(row['id'])).whereType<String>().toSet();
+
+    if (publishedCourseIds.isEmpty) return const [];
+
+    final moduleRows = _rows(
+      await _supabase
+          .from('course_modules')
+          .select('id,course_id,status,sort_order')
+          .inFilter('course_id', publishedCourseIds.toList())
+          .eq('status', 'published')
+          .order('sort_order', ascending: true),
+    );
+
+    final moduleIds = moduleRows
+        .map((row) => _text(row['id']))
+        .whereType<String>()
+        .toSet()
+        .toList(growable: false);
+
+    final lessonRows = moduleIds.isEmpty
+        ? const <Map<String, dynamic>>[]
+        : _rows(
+            await _supabase
+                .from('lessons')
+                .select('id,module_id,status,sort_order')
+                .inFilter('module_id', moduleIds)
+                .eq('status', 'published')
+                .order('sort_order', ascending: true),
+          );
+
+    final modulesById = <String, Map<String, dynamic>>{
+      for (final module in moduleRows)
+        if (_text(module['id']) != null) _text(module['id'])!: module,
+    };
+
+    final lessonsById = <String, Map<String, dynamic>>{
+      for (final lesson in lessonRows)
+        if (_text(lesson['id']) != null) _text(lesson['id'])!: lesson,
+    };
+
+    final trailIdsByCourse = <String, Set<String>>{};
+
+    for (final map in allTrailMapRows) {
+      final courseId = _text(map['course_id']);
+      final trailId = _text(map['category_id']);
+
+      if (courseId == null ||
+          trailId == null ||
+          !publishedCourseIds.contains(courseId)) {
+        continue;
+      }
+
+      (trailIdsByCourse[courseId] ??= <String>{}).add(trailId);
+    }
+
+    final lessonIdsByTrail = <String, Set<String>>{};
+
+    for (final lesson in lessonRows) {
+      final lessonId = _text(lesson['id']);
+      final moduleId = _text(lesson['module_id']);
+      final module = moduleId == null ? null : modulesById[moduleId];
+      final courseId = module == null ? null : _text(module['course_id']);
+
+      if (lessonId == null || courseId == null) continue;
+
+      for (final trailId in trailIdsByCourse[courseId] ?? const <String>{}) {
+        (lessonIdsByTrail[trailId] ??= <String>{}).add(lessonId);
+      }
+    }
+
+    final completedLessonIdsByTrail = <String, Set<String>>{};
+    final latestActivityByTrail = <String, DateTime>{};
+
+    for (final progress in progressRows) {
+      final lessonId = _text(progress['lesson_id']);
+      final lesson = lessonId == null ? null : lessonsById[lessonId];
+      final moduleId = lesson == null ? null : _text(lesson['module_id']);
+      final module = moduleId == null ? null : modulesById[moduleId];
+      final courseId = module == null ? null : _text(module['course_id']);
+
+      if (lessonId == null || courseId == null) continue;
+
+      final activityAt = _progressDate(progress);
+
+      for (final trailId in trailIdsByCourse[courseId] ?? const <String>{}) {
+        final currentActivity = latestActivityByTrail[trailId];
+
+        if (currentActivity == null || activityAt.isAfter(currentActivity)) {
+          latestActivityByTrail[trailId] = activityAt;
+        }
+
+        if (_text(progress['completed_at']) != null) {
+          (completedLessonIdsByTrail[trailId] ??= <String>{}).add(lessonId);
+        }
+      }
+    }
+
+    final trails = <_StudentMyTrail>[];
+
+    for (final trail in trailRows) {
+      final trailId = _text(trail['id']);
+      if (trailId == null || !latestActivityByTrail.containsKey(trailId)) {
+        continue;
+      }
+
+      final lessonIds = lessonIdsByTrail[trailId] ?? const <String>{};
+      final completedIds =
+          completedLessonIdsByTrail[trailId] ?? const <String>{};
+      final completedCount = completedIds.where(lessonIds.contains).length;
+      final totalCount = lessonIds.length;
+
+      trails.add(
+        _StudentMyTrail(
+          id: trailId,
+          title: _text(trail['title']) ?? 'Trilha',
+          subtitle: _buildStartedSubtitle(
+            description: _text(trail['description']) ?? '',
+            completedCount: completedCount,
+            totalCount: totalCount,
+          ),
+          imageUrl: _resolveAssetUrl(_selectTrailCover(trail)),
+          completedLessons: completedCount,
+          totalLessons: totalCount,
+          activityAt: latestActivityByTrail[trailId],
+          isFavorite: false,
+        ),
+      );
+    }
+
+    trails.sort((first, second) {
+      return (second.activityAt ?? DateTime.fromMillisecondsSinceEpoch(0))
+          .compareTo(
+            first.activityAt ?? DateTime.fromMillisecondsSinceEpoch(0),
+          );
+    });
+
+    return trails;
+  }
+
+  Future<List<_StudentMyTrail>> _fetchFavoriteTrails(String studentId) async {
+    final dynamic response = await _supabase
+        .from('student_favorites')
+        .select(
+          'id,content_type,content_id,title,subtitle,category,duration,'
+          'level,image_url,target_url,created_at',
+        )
+        .eq('student_id', studentId)
+        .order('created_at', ascending: false);
+
+    final seenTrailIds = <String>{};
+    final favorites = <_StudentMyTrail>[];
+
+    for (final row in _rows(response)) {
+      final contentType = (_text(row['content_type']) ?? '').toLowerCase();
+      if (contentType != 'trail') continue;
+
+      final trailId = _text(row['content_id']);
+      final title = _text(row['title']);
+
+      if (trailId == null || title == null || !seenTrailIds.add(trailId)) {
+        continue;
+      }
+
+      favorites.add(
+        _StudentMyTrail(
+          id: trailId,
+          title: title,
+          subtitle:
+              _text(row['subtitle']) ??
+              _text(row['category']) ??
+              'Trilha salva na sua lista.',
+          imageUrl: _resolveAssetUrl(_text(row['image_url'])),
+          completedLessons: 0,
+          totalLessons: 0,
+          activityAt: _dateFromValue(_text(row['created_at'])),
+          isFavorite: true,
+        ),
+      );
+    }
+
+    return favorites;
+  }
+
+  String _buildStartedSubtitle({
+    required String description,
+    required int completedCount,
+    required int totalCount,
+  }) {
+    if (totalCount > 0) {
+      return '$completedCount de $totalCount aulas concluídas';
+    }
+
+    return description.isNotEmpty
+        ? description
+        : 'Continue sua jornada nesta trilha.';
+  }
+
+  void _closePage() {
+    Navigator.of(context).maybePop();
+  }
+
+  void _openTrailsLibrary() {
+    Navigator.of(
+      context,
+    ).pushNamedAndRemoveUntil(StudentAppRoutes.trails, (route) => false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final trails = _activeTab == _MyTrailsTab.inProgress
+        ? _startedTrails
+        : _favoriteTrails;
+
+    return StudentAppShell(
+      activeDestination: StudentAppDestination.home,
+      scrollController: _scrollController,
+      backgroundColor: _myTrailsBackground,
+      body: RefreshIndicator(
+        color: UnlColors.gold,
+        backgroundColor: Colors.black,
+        onRefresh: _loadMyTrails,
+        child: CustomScrollView(
+          controller: _scrollController,
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
+          slivers: [
+            const SliverToBoxAdapter(child: SizedBox(height: 128)),
+            SliverToBoxAdapter(child: _buildHeader()),
+            SliverToBoxAdapter(child: _buildTabs()),
+            if (_isLoading)
+              SliverToBoxAdapter(child: _buildLoadingState())
+            else if (_loadError != null)
+              SliverToBoxAdapter(child: _buildErrorState())
+            else
+              SliverToBoxAdapter(
+                child: _buildTrailsContent(
+                  trails,
+                  isFavoriteTab: _activeTab == _MyTrailsTab.favorites,
+                ),
+              ),
+            const SliverToBoxAdapter(child: SizedBox(height: 36)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 14, 0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'PERFIL',
+                  style: TextStyle(
+                    color: UnlColors.gold,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 2.1,
+                  ),
+                ),
+                const SizedBox(height: 13),
+                const Text(
+                  'Minhas trilhas',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    height: 1,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -1.1,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Acompanhe suas trilhas em andamento e os conteúdos salvos.',
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.56),
+                    fontSize: 14,
+                    height: 1.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: _closePage,
+            tooltip: 'Fechar',
+            icon: const Icon(
+              Icons.close_rounded,
+              color: Colors.white,
+              size: 27,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabs() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 28, 20, 0),
+      child: Row(
+        children: [
+          Expanded(
+            child: _MyTrailsTabButton(
+              label: 'Em andamento',
+              count: _startedTrails.length,
+              active: _activeTab == _MyTrailsTab.inProgress,
+              onTap: () {
+                if (_activeTab == _MyTrailsTab.inProgress) return;
+                setState(() => _activeTab = _MyTrailsTab.inProgress);
+              },
+            ),
+          ),
+          const SizedBox(width: 18),
+          Expanded(
+            child: _MyTrailsTabButton(
+              label: 'Favoritos',
+              count: _favoriteTrails.length,
+              active: _activeTab == _MyTrailsTab.favorites,
+              onTap: () {
+                if (_activeTab == _MyTrailsTab.favorites) return;
+                setState(() => _activeTab = _MyTrailsTab.favorites);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTrailsContent(
+    List<_StudentMyTrail> trails, {
+    required bool isFavoriteTab,
+  }) {
+    if (trails.isEmpty) {
+      return _buildEmptyState(isFavoriteTab: isFavoriteTab);
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 22, 20, 0),
+      child: Column(
+        children: [
+          for (var index = 0; index < trails.length; index++) ...[
+            _MyTrailRow(trail: trails[index]),
+            if (index < trails.length - 1)
+              const Divider(height: 32, color: Colors.white10),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyState({required bool isFavoriteTab}) {
+    final title = isFavoriteTab
+        ? 'Nenhuma trilha salva ainda'
+        : 'Você ainda não iniciou uma trilha';
+    final description = isFavoriteTab
+        ? 'Quando você salvar uma trilha, ela aparecerá aqui para acessar quando quiser.'
+        : 'Escolha uma trilha disponível para começar sua jornada.';
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(28, 78, 28, 36),
+      child: Column(
+        children: [
+          Icon(
+            isFavoriteTab
+                ? Icons.bookmark_border_rounded
+                : Icons.school_outlined,
+            color: UnlColors.gold,
+            size: 48,
+          ),
+          const SizedBox(height: 20),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              height: 1.12,
+              fontWeight: FontWeight.w900,
+              letterSpacing: -0.55,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            description,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.54),
+              fontSize: 14,
+              height: 1.5,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 24),
+          TextButton.icon(
+            onPressed: _openTrailsLibrary,
+            style: TextButton.styleFrom(foregroundColor: UnlColors.gold),
+            icon: const Icon(Icons.arrow_forward_rounded, size: 19),
+            label: const Text(
+              'Ver trilhas disponíveis',
+              style: TextStyle(fontWeight: FontWeight.w900),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingState() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 28, 20, 0),
+      child: Column(
+        children: [
+          _buildSkeletonRow(),
+          const Divider(height: 32, color: Colors.white10),
+          _buildSkeletonRow(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSkeletonRow() {
+    return Row(
+      children: [
+        Container(
+          width: 118,
+          height: 82,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.08),
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 76,
+                height: 10,
+                color: Colors.white.withOpacity(0.07),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                height: 18,
+                color: Colors.white.withOpacity(0.07),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                width: 150,
+                height: 12,
+                color: Colors.white.withOpacity(0.07),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildErrorState() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 46, 20, 0),
+      child: Column(
+        children: [
+          const Icon(Icons.refresh_rounded, color: UnlColors.gold, size: 38),
+          const SizedBox(height: 16),
+          const Text(
+            'Não foi possível atualizar suas trilhas.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 21,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            _loadError ?? '',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.56),
+              fontSize: 14,
+              height: 1.45,
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextButton.icon(
+            onPressed: _loadMyTrails,
+            style: TextButton.styleFrom(foregroundColor: UnlColors.gold),
+            icon: const Icon(Icons.refresh_rounded),
+            label: const Text(
+              'Tentar novamente',
+              style: TextStyle(fontWeight: FontWeight.w900),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String? _selectTrailCover(Map<String, dynamic> trail) {
+    return _text(trail['cover_vertical_path']) ??
+        _text(trail['cover_horizontal_path']) ??
+        _text(trail['cover_featured_path']) ??
+        _text(trail['cover_path']);
+  }
+
+  String? _resolveAssetUrl(String? path) {
+    if (path == null || path.trim().isEmpty) return null;
+
+    final cleanPath = path.trim();
+
+    if (cleanPath.startsWith('http://') || cleanPath.startsWith('https://')) {
+      return cleanPath;
+    }
+
+    var normalized = cleanPath.replaceFirst(RegExp(r'^/+'), '');
+
+    if (normalized.startsWith('public/')) {
+      normalized = normalized.replaceFirst('public/', '');
+      return '$_myTrailsWebsiteBaseUrl/$normalized';
+    }
+
+    if (normalized.startsWith('_next/')) {
+      return '$_myTrailsWebsiteBaseUrl/$normalized';
+    }
+
+    if (normalized.startsWith('student-banners/')) {
+      return _supabase.storage
+          .from('student-banners')
+          .getPublicUrl(normalized.replaceFirst('student-banners/', ''));
+    }
+
+    if (normalized.startsWith('materials/')) {
+      return _supabase.storage
+          .from('materials')
+          .getPublicUrl(normalized.replaceFirst('materials/', ''));
+    }
+
+    normalized = normalized
+        .replaceFirst('covers/', '')
+        .replaceFirst('course-covers/', '');
+
+    if (normalized.isEmpty) return null;
+
+    return _supabase.storage.from('covers').getPublicUrl(normalized);
+  }
+
+  List<Map<String, dynamic>> _rows(dynamic value) {
+    if (value is! List) return const [];
+
+    return value
+        .whereType<Map>()
+        .map((row) => Map<String, dynamic>.from(row))
+        .toList(growable: false);
+  }
+
+  String? _text(dynamic value) {
+    final text = value?.toString().trim();
+
+    if (text == null || text.isEmpty || text == 'null') return null;
+
+    return text;
+  }
+
+  DateTime _progressDate(Map<String, dynamic> row) {
+    return _dateFromValue(
+          _text(row['last_watched_at']) ?? _text(row['updated_at']),
+        ) ??
+        DateTime.fromMillisecondsSinceEpoch(0);
+  }
+
+  DateTime? _dateFromValue(String? value) {
+    if (value == null || value.isEmpty) return null;
+
+    return DateTime.tryParse(value)?.toLocal();
+  }
+}
+
+class _StudentMyTrail {
+  const _StudentMyTrail({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.imageUrl,
+    required this.completedLessons,
+    required this.totalLessons,
+    required this.activityAt,
+    required this.isFavorite,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String? imageUrl;
+  final int completedLessons;
+  final int totalLessons;
+  final DateTime? activityAt;
+  final bool isFavorite;
+
+  double get progress {
+    if (totalLessons <= 0) return 0;
+
+    return (completedLessons / totalLessons).clamp(0.0, 1.0).toDouble();
+  }
+}
+
+class _MyTrailsTabButton extends StatelessWidget {
+  const _MyTrailsTabButton({
+    required this.label,
+    required this.count,
+    required this.active,
+    required this.onTap,
+  });
+
+  final String label;
+  final int count;
+  final bool active;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final foreground = active ? Colors.white : Colors.white.withOpacity(0.46);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(2, 8, 2, 12),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: active ? UnlColors.gold : Colors.white.withOpacity(0.12),
+                width: active ? 2 : 1,
+              ),
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: foreground,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              Text(
+                '$count',
+                style: TextStyle(
+                  color: active ? UnlColors.gold : Colors.white38,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MyTrailRow extends StatelessWidget {
+  const _MyTrailRow({required this.trail});
+
+  final _StudentMyTrail trail;
+
+  @override
+  Widget build(BuildContext context) {
+    final progressLabel = trail.totalLessons > 0
+        ? '${trail.completedLessons} de ${trail.totalLessons} aulas'
+        : _relativeDate(trail.activityAt);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _TrailThumbnail(imageUrl: trail.imageUrl),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      trail.isFavorite
+                          ? Icons.bookmark_rounded
+                          : Icons.school_outlined,
+                      color: UnlColors.gold,
+                      size: 15,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      trail.isFavorite ? 'FAVORITO' : 'EM ANDAMENTO',
+                      style: const TextStyle(
+                        color: UnlColors.gold,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 7),
+                Text(
+                  trail.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    height: 1.1,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.35,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  trail.subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.54),
+                    fontSize: 12.5,
+                    height: 1.32,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                if (!trail.isFavorite && trail.totalLessons > 0) ...[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(99),
+                    child: LinearProgressIndicator(
+                      value: trail.progress,
+                      minHeight: 4,
+                      backgroundColor: Colors.white.withOpacity(0.10),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        UnlColors.gold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 7),
+                ],
+                Text(
+                  trail.isFavorite
+                      ? 'Salvo ${_relativeDate(trail.activityAt)}'
+                      : progressLabel,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.44),
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  static String _relativeDate(DateTime? date) {
+    if (date == null) return '';
+
+    final difference = DateTime.now().difference(date);
+
+    if (difference.isNegative || difference.inMinutes < 1) return 'agora';
+    if (difference.inMinutes < 60) return 'há ${difference.inMinutes} min';
+    if (difference.inHours < 24) return 'há ${difference.inHours} h';
+    if (difference.inDays == 1) return 'ontem';
+
+    return 'há ${difference.inDays} dias';
+  }
+}
+
+class _TrailThumbnail extends StatelessWidget {
+  const _TrailThumbnail({required this.imageUrl});
+
+  final String? imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 118,
+      height: 82,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(14),
+        child: imageUrl == null
+            ? _fallback()
+            : Image.network(
+                imageUrl!,
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.high,
+                errorBuilder: (_, __, ___) => _fallback(),
+              ),
+      ),
+    );
+  }
+
+  Widget _fallback() {
+    return const DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF5C4825), Color(0xFF2B210F), Color(0xFF0A0B10)],
+        ),
+      ),
+      child: Center(
+        child: Icon(Icons.school_outlined, color: UnlColors.gold, size: 31),
+      ),
+    );
+  }
+}
