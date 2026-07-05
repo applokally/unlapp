@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 
 import '../../../core/services/auth_service.dart';
@@ -119,33 +120,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Center(
-                          child: Text(
-                            'Entrar na plataforma',
-                            textAlign: TextAlign.center,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: UnlColors.textPrimary,
-                              fontSize: 32,
-                              height: 1,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: -1.1,
+                        const SizedBox(
+                          width: double.infinity,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              'Entrar na plataforma',
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: UnlColors.textPrimary,
+                                fontSize: 26,
+                                height: 1.1,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.55,
+                              ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 12),
                         const Text(
                           'Use seu e-mail e senha para acessar como aluno.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: UnlColors.textSecondary,
-                            fontSize: 15,
-                            height: 1.6,
+                            fontSize: 14,
+                            height: 1.45,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 26),
                         UnlTextField(
                           label: 'E-mail',
                           controller: _emailController,

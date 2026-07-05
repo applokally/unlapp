@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -245,7 +246,7 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             icon: const Icon(Icons.arrow_back_rounded, size: 20),
             label: const Text(
               'Voltar ao curso',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
           ),
           const SizedBox(height: 20),
@@ -254,8 +255,8 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             style: TextStyle(
               color: UnlColors.gold,
               fontSize: 10,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1.8,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.6,
             ),
           ),
           const SizedBox(height: 11),
@@ -263,10 +264,10 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             assessment.title,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 30,
-              height: 1.03,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -1.0,
+              fontSize: 26,
+              height: 1.08,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.55,
             ),
           ),
           if (_descriptionFor(assessment).isNotEmpty) ...[
@@ -276,8 +277,8 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
               style: TextStyle(
                 color: Colors.white.withOpacity(0.55),
                 fontSize: 14,
-                height: 1.5,
-                fontWeight: FontWeight.w500,
+                height: 1.48,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
@@ -304,10 +305,10 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             question.prompt,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 24,
-              height: 1.18,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -0.70,
+              fontSize: 21,
+              height: 1.2,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.4,
             ),
           ),
           if (question.helpText != null && question.helpText!.isNotEmpty) ...[
@@ -317,8 +318,8 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
               style: TextStyle(
                 color: Colors.white.withOpacity(0.47),
                 fontSize: 13,
-                height: 1.45,
-                fontWeight: FontWeight.w500,
+                height: 1.48,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
@@ -740,8 +741,9 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
@@ -789,8 +791,9 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
@@ -800,8 +803,8 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             style: TextStyle(
               color: Colors.white54,
               fontSize: 14,
-              height: 1.45,
-              fontWeight: FontWeight.w500,
+              height: 1.48,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 24),
@@ -840,10 +843,10 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 34,
-              height: 1.0,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -1.1,
+              fontSize: 28,
+              height: 1.08,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.65,
             ),
           ),
           const SizedBox(height: 13),
@@ -855,8 +858,8 @@ class _StudentAssessmentScreenState extends State<StudentAssessmentScreen> {
             style: TextStyle(
               color: Colors.white.withOpacity(0.55),
               fontSize: 14,
-              height: 1.5,
-              fontWeight: FontWeight.w500,
+              height: 1.48,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 24),

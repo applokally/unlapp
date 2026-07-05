@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -419,8 +420,8 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
                   style: TextStyle(
                     color: UnlColors.gold,
                     fontSize: 11,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 2.1,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.9,
                   ),
                 ),
                 const SizedBox(height: 13),
@@ -428,10 +429,10 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
                   'Meus cursos',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 30,
-                    height: 1,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -1.1,
+                    fontSize: 26,
+                    height: 1.08,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.55,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -440,8 +441,8 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.56),
                     fontSize: 14,
-                    height: 1.5,
-                    fontWeight: FontWeight.w500,
+                    height: 1.48,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
@@ -543,10 +544,10 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 22,
+              fontSize: 20,
               height: 1.12,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -0.55,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.4,
             ),
           ),
           const SizedBox(height: 10),
@@ -557,7 +558,7 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
               color: Colors.white.withOpacity(0.54),
               fontSize: 14,
               height: 1.5,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 24),
@@ -567,7 +568,7 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
             icon: const Icon(Icons.arrow_forward_rounded, size: 19),
             label: const Text(
               'Ver cursos disponíveis',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -640,8 +641,9 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 21,
-              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
@@ -661,7 +663,7 @@ class _StudentMyCoursesScreenState extends State<StudentMyCoursesScreen> {
             icon: const Icon(Icons.refresh_rounded),
             label: const Text(
               'Tentar novamente',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -816,7 +818,7 @@ class _MyCoursesTabButton extends StatelessWidget {
                   style: TextStyle(
                     color: foreground,
                     fontSize: 14,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -825,7 +827,7 @@ class _MyCoursesTabButton extends StatelessWidget {
                 style: TextStyle(
                   color: active ? UnlColors.gold : Colors.white38,
                   fontSize: 13,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ],
@@ -873,7 +875,7 @@ class _MyCourseRow extends StatelessWidget {
                       style: const TextStyle(
                         color: UnlColors.gold,
                         fontSize: 10,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                         letterSpacing: 1.1,
                       ),
                     ),
@@ -887,9 +889,9 @@ class _MyCourseRow extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 17,
-                    height: 1.1,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.35,
+                    height: 1.14,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.2,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -901,7 +903,7 @@ class _MyCourseRow extends StatelessWidget {
                     color: Colors.white.withOpacity(0.54),
                     fontSize: 12.5,
                     height: 1.32,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 10),

@@ -1,4 +1,4 @@
-// VERSÃO: v30
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 
 import '../theme/unl_colors.dart';
@@ -40,12 +40,39 @@ class _AuthBackgroundState extends State<AuthBackground>
         children: [
           const Positioned.fill(child: ColoredBox(color: UnlColors.black)),
           Positioned.fill(
-            child: Opacity(
-              opacity: 0.22,
-              child: Image.asset(
-                'assets/images/HtbB34sFMlId7A1hElSRnTAjLsc.png',
-                fit: BoxFit.fitWidth,
-                alignment: Alignment.topCenter,
+            child: IgnorePointer(
+              child: Opacity(
+                opacity: 0.82,
+                child: ColorFiltered(
+                  colorFilter: const ColorFilter.matrix([
+                    2.15,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    2.15,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    2.15,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                  ]),
+                  child: Image.asset(
+                    'assets/images/HtbB34sFMlId7A1hElSRnTAjLsc.png',
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topCenter,
+                    filterQuality: FilterQuality.high,
+                  ),
+                ),
               ),
             ),
           ),
@@ -56,9 +83,9 @@ class _AuthBackgroundState extends State<AuthBackground>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.08),
-                    Colors.black.withValues(alpha: 0.50),
-                    Colors.black.withValues(alpha: 0.90),
+                    Colors.black.withValues(alpha: 0.03),
+                    Colors.black.withValues(alpha: 0.40),
+                    Colors.black.withValues(alpha: 0.92),
                   ],
                   stops: const [0.0, 0.48, 1.0],
                 ),
@@ -72,7 +99,7 @@ class _AuthBackgroundState extends State<AuthBackground>
                   center: const Alignment(-0.72, -0.24),
                   radius: 0.82,
                   colors: [
-                    UnlColors.gold.withValues(alpha: 0.055),
+                    UnlColors.gold.withValues(alpha: 0.07),
                     Colors.transparent,
                   ],
                   stops: const [0.0, 1.0],

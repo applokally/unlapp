@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -281,8 +282,8 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
             style: TextStyle(
               color: UnlColors.gold,
               fontSize: 11,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 2.1,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.9,
             ),
           ),
           const SizedBox(height: 14),
@@ -290,10 +291,10 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
             'Cursos',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 30,
-              height: 1,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -1.1,
+              fontSize: 26,
+              height: 1.08,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.55,
             ),
           ),
           const SizedBox(height: 14),
@@ -302,8 +303,8 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
             style: TextStyle(
               color: Colors.white.withOpacity(0.56),
               fontSize: 14,
-              height: 1.5,
-              fontWeight: FontWeight.w500,
+              height: 1.48,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],
@@ -491,9 +492,9 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 17,
-                    height: 1.06,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.45,
+                    height: 1.1,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.3,
                   ),
                 ),
                 const Spacer(),
@@ -505,7 +506,7 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
                       style: TextStyle(
                         color: UnlColors.gold,
                         fontSize: 11,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     SizedBox(width: 3),
@@ -527,10 +528,10 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 23,
-                    height: 1.05,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.65,
+                    fontSize: 21,
+                    height: 1.1,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.4,
                   ),
                 ),
                 const SizedBox(height: 14),
@@ -542,7 +543,7 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
                       style: TextStyle(
                         color: UnlColors.gold,
                         fontSize: 13,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     SizedBox(width: 4),
@@ -609,8 +610,9 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
               'Não foi possível carregar os cursos.',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 17,
-                fontWeight: FontWeight.w900,
+                fontSize: 16,
+                height: 1.15,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 6),
@@ -629,7 +631,7 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
               icon: const Icon(Icons.refresh_rounded),
               label: const Text(
                 'Tentar novamente',
-                style: TextStyle(fontWeight: FontWeight.w900),
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -662,10 +664,10 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 23,
-                height: 1.08,
-                fontWeight: FontWeight.w900,
-                letterSpacing: -0.65,
+                fontSize: 21,
+                height: 1.12,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -0.4,
               ),
             ),
             const SizedBox(height: 11),
@@ -675,8 +677,8 @@ class _StudentCoursesScreenState extends State<StudentCoursesScreen> {
               style: TextStyle(
                 color: Colors.white.withOpacity(0.48),
                 fontSize: 14,
-                height: 1.45,
-                fontWeight: FontWeight.w500,
+                height: 1.48,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],

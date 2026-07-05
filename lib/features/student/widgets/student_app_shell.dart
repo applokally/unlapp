@@ -1,4 +1,4 @@
-// VERSÃO: v30
+// VERSÃO: v31
 import 'dart:async';
 import 'dart:ui';
 
@@ -552,8 +552,8 @@ class _StudentAppShellState extends State<StudentAppShell> {
                           style: TextStyle(
                             color: UnlColors.gold,
                             fontSize: 12,
-                            height: 1.05,
-                            fontWeight: FontWeight.w900,
+                            height: 1.1,
+                            fontWeight: FontWeight.w700,
                           ),
                         );
                       },
@@ -651,10 +651,10 @@ class _StudentAppShellState extends State<StudentAppShell> {
                           _panelTitle,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 27,
-                            height: 1,
-                            letterSpacing: -0.8,
-                            fontWeight: FontWeight.w900,
+                            fontSize: 24,
+                            height: 1.08,
+                            letterSpacing: -0.45,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -800,7 +800,7 @@ class _StudentAppShellState extends State<StudentAppShell> {
                                       style: const TextStyle(
                                         color: _studentShellGold,
                                         fontSize: 11,
-                                        fontWeight: FontWeight.w800,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     const SizedBox(height: 3),
@@ -811,8 +811,8 @@ class _StudentAppShellState extends State<StudentAppShell> {
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 15,
-                                        height: 1.3,
-                                        fontWeight: FontWeight.w800,
+                                        height: 1.32,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     const SizedBox(height: 3),
@@ -913,8 +913,8 @@ class _StudentAppShellState extends State<StudentAppShell> {
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
-                            height: 1.3,
-                            fontWeight: FontWeight.w800,
+                            height: 1.32,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         if (notification.body.isNotEmpty) ...[
@@ -974,10 +974,10 @@ class _StudentAppShellState extends State<StudentAppShell> {
           'Área do aluno',
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 28,
-            height: 1,
-            letterSpacing: -0.9,
-            fontWeight: FontWeight.w900,
+            fontSize: 24,
+            height: 1.08,
+            letterSpacing: -0.45,
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 12),
@@ -990,7 +990,7 @@ class _StudentAppShellState extends State<StudentAppShell> {
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 13,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
@@ -1029,7 +1029,7 @@ class _StudentAppShellState extends State<StudentAppShell> {
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   if (email.isNotEmpty) ...[
@@ -1101,7 +1101,7 @@ class _StudentAppShellState extends State<StudentAppShell> {
           icon: const Icon(Icons.logout_rounded, size: 20),
           label: const Text(
             'Sair da conta',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
           ),
         ),
       ],
@@ -1190,7 +1190,7 @@ class _StudentAppShellState extends State<StudentAppShell> {
         style: const TextStyle(
           color: _studentShellGold,
           fontSize: 19,
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
@@ -1223,8 +1223,9 @@ class _StudentAppShellState extends State<StudentAppShell> {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 19,
-                fontWeight: FontWeight.w900,
+                fontSize: 18,
+                height: 1.15,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 9),
@@ -1270,7 +1271,7 @@ class _StudentAppShellState extends State<StudentAppShell> {
         style: const TextStyle(
           color: UnlColors.gold,
           fontSize: 13,
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
@@ -1419,8 +1420,8 @@ class _StudentAppShellState extends State<StudentAppShell> {
                                                   ),
                                             fontSize: 8.7,
                                             fontWeight: active
-                                                ? FontWeight.w900
-                                                : FontWeight.w700,
+                                                ? FontWeight.w700
+                                                : FontWeight.w500,
                                             shadows: active
                                                 ? const [
                                                     Shadow(
@@ -1555,7 +1556,7 @@ class _ProfileMenuItem extends StatelessWidget {
                   style: TextStyle(
                     color: foreground,
                     fontSize: 15,
-                    fontWeight: active ? FontWeight.w900 : FontWeight.w700,
+                    fontWeight: active ? FontWeight.w600 : FontWeight.w500,
                   ),
                 ),
               ),

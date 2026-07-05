@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -350,8 +351,9 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.w900,
+                fontSize: 20,
+                height: 1.12,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 9),
@@ -378,7 +380,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
               icon: const Icon(Icons.refresh_rounded),
               label: const Text(
                 'Tentar novamente',
-                style: TextStyle(fontWeight: FontWeight.w900),
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -405,8 +407,8 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
                   style: TextStyle(
                     color: UnlColors.gold,
                     fontSize: 11,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 2.1,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.9,
                   ),
                 ),
               ),
@@ -428,10 +430,10 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
             'Meus dados',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 30,
-              height: 1,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -1.1,
+              fontSize: 26,
+              height: 1.08,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.55,
             ),
           ),
           const SizedBox(height: 12),
@@ -440,8 +442,8 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
             style: TextStyle(
               color: Colors.white.withOpacity(0.56),
               fontSize: 14,
-              height: 1.5,
-              fontWeight: FontWeight.w500,
+              height: 1.48,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 30),
@@ -459,10 +461,10 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
-                        height: 1.1,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -0.45,
+                        fontSize: 19,
+                        height: 1.14,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.25,
                       ),
                     ),
                     if (_email.isNotEmpty) ...[
@@ -518,8 +520,9 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
             style: TextStyle(
               color: Colors.white,
               fontSize: 19,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -0.35,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.2,
             ),
           ),
           const SizedBox(height: 7),
@@ -529,7 +532,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
               color: Colors.white.withOpacity(0.52),
               fontSize: 13,
               height: 1.45,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 18),
@@ -580,7 +583,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
                 _isSaving ? 'Salvando...' : 'Salvar alterações',
                 style: const TextStyle(
                   fontSize: 15,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -652,7 +655,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
           style: const TextStyle(
             color: Colors.white,
             fontSize: 15,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
           decoration: _inputDecoration(hintText),
         ),
@@ -685,7 +688,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
             style: TextStyle(
               color: Colors.white.withOpacity(0.42),
               fontSize: 15,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),
@@ -704,7 +707,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
       hintStyle: TextStyle(
         color: Colors.white.withOpacity(0.32),
         fontSize: 14,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
       ),
       filled: true,
       fillColor: Colors.black,
@@ -854,7 +857,7 @@ class _ProfileAvatar extends StatelessWidget {
                   style: const TextStyle(
                     color: UnlColors.gold,
                     fontSize: 19,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               )
@@ -868,7 +871,7 @@ class _ProfileAvatar extends StatelessWidget {
                     style: const TextStyle(
                       color: UnlColors.gold,
                       fontSize: 19,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -914,7 +917,7 @@ class _FieldLabel extends StatelessWidget {
           style: TextStyle(
             color: Colors.white.withOpacity(0.72),
             fontSize: 14,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],

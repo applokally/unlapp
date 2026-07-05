@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -1113,9 +1114,10 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             'Não foi possível abrir esta aula.',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 23,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -0.55,
+              fontSize: 21,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.4,
             ),
           ),
           const SizedBox(height: 9),
@@ -1134,7 +1136,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             icon: const Icon(Icons.refresh_rounded),
             label: const Text(
               'Tentar novamente',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -1191,7 +1193,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             style: const TextStyle(
               color: UnlColors.gold,
               fontSize: 11,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
               letterSpacing: 1.8,
             ),
           ),
@@ -1200,10 +1202,10 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             current.title,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 29,
-              height: 1.05,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -1.0,
+              fontSize: 26,
+              height: 1.08,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.55,
             ),
           ),
           if (current.description != null &&
@@ -1215,7 +1217,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                 color: Colors.white.withOpacity(0.54),
                 fontSize: 14,
                 height: 1.5,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
@@ -1314,7 +1316,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                     : _completionLabel(bundle, next),
                 style: const TextStyle(
                   fontSize: 15,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -1343,7 +1345,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                   icon: const Icon(Icons.arrow_back_rounded, size: 18),
                   label: const Text(
                     'Anterior',
-                    style: TextStyle(fontWeight: FontWeight.w800),
+                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -1367,7 +1369,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                   icon: const Icon(Icons.arrow_forward_rounded, size: 18),
                   label: const Text(
                     'Próxima',
-                    style: TextStyle(fontWeight: FontWeight.w800),
+                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -1426,7 +1428,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                 color: Colors.white.withOpacity(0.83),
                 fontSize: 16,
                 height: 1.7,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
     );
@@ -1525,7 +1527,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 14),
@@ -1715,7 +1717,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 19,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
@@ -1744,7 +1746,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
               icon: const Icon(Icons.copy_outlined, size: 18),
               label: const Text(
                 'Copiar link do conteúdo',
-                style: TextStyle(fontWeight: FontWeight.w900),
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -1806,7 +1808,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 17,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 7),
@@ -1833,7 +1835,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
           style: TextStyle(
             color: UnlColors.gold,
             fontSize: 11,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1.8,
           ),
         ),
@@ -1897,7 +1899,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                         color: Colors.white,
                         fontSize: 14,
                         height: 1.22,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -1936,7 +1938,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
           style: TextStyle(
             color: UnlColors.gold,
             fontSize: 11,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1.8,
           ),
         ),
@@ -1947,7 +1949,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
             color: Colors.white.withOpacity(0.52),
             fontSize: 13,
             height: 1.45,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
         ),
         const SizedBox(height: 12),
@@ -1971,14 +1973,14 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                   color: Colors.white,
                   fontSize: 14,
                   height: 1.42,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
                 decoration: InputDecoration(
                   hintText: 'Escreva um comentário sobre esta aula...',
                   hintStyle: TextStyle(
                     color: Colors.white.withOpacity(0.34),
                     fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                   border: InputBorder.none,
                   counterStyle: TextStyle(
@@ -2015,7 +2017,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                   _isSendingComment ? 'Enviando...' : 'Enviar comentário',
                   style: const TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -2067,7 +2069,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                     style: const TextStyle(
                       color: UnlColors.gold,
                       fontSize: 12,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w700,
                     ),
                   )
                 : Image.network(
@@ -2078,7 +2080,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                       style: const TextStyle(
                         color: UnlColors.gold,
                         fontSize: 12,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -2095,7 +2097,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -2114,7 +2116,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                     color: Colors.white.withOpacity(0.76),
                     fontSize: 13.5,
                     height: 1.48,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 if (comment.adminNote != null &&
@@ -2138,7 +2140,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                           style: TextStyle(
                             color: UnlColors.gold,
                             fontSize: 11,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.w700,
                             letterSpacing: 0.45,
                           ),
                         ),
@@ -2293,7 +2295,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
           style: TextStyle(
             color: UnlColors.gold,
             fontSize: 11,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1.8,
           ),
         ),
@@ -2316,7 +2318,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               subtitle: Text(
@@ -2378,7 +2380,7 @@ class _StudentLessonScreenState extends State<StudentLessonScreen> {
                         : Colors.white.withOpacity(0.70),
                     fontSize: 14,
                     height: 1.3,
-                    fontWeight: isCurrent ? FontWeight.w900 : FontWeight.w700,
+                    fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w700,
                   ),
                 ),
               ),

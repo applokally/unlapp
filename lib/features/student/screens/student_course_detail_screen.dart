@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -375,8 +376,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.60),
                     fontSize: 14,
-                    height: 1.52,
-                    fontWeight: FontWeight.w500,
+                    height: 1.48,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -401,10 +402,10 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                 'Conteúdo',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 23,
-                  height: 1.1,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: -0.60,
+                  fontSize: 21,
+                  height: 1.12,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: -0.4,
                 ),
               ),
               const SizedBox(height: 7),
@@ -415,7 +416,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.50),
                   fontSize: 13,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(height: 16),
@@ -506,7 +507,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 13,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -525,10 +526,10 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 34,
-                height: 1.01,
-                fontWeight: FontWeight.w900,
-                letterSpacing: -1.2,
+                fontSize: 28,
+                height: 1.08,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -0.65,
               ),
             ),
           ),
@@ -550,8 +551,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
           style: TextStyle(
             color: UnlColors.gold,
             fontSize: 10,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 1.7,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.6,
           ),
         ),
         const SizedBox(height: 8),
@@ -562,10 +563,10 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
               '${(progress * 100).round()}%',
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 31,
-                height: 0.95,
-                fontWeight: FontWeight.w900,
-                letterSpacing: -1.1,
+                fontSize: 28,
+                height: 1.0,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -0.55,
               ),
             ),
             const SizedBox(width: 10),
@@ -579,8 +580,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.50),
                     fontSize: 13,
-                    height: 1.35,
-                    fontWeight: FontWeight.w600,
+                    height: 1.4,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -623,7 +624,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
         icon: const Icon(Icons.play_arrow_rounded, size: 22),
         label: Text(
           label,
-          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
         ),
       ),
     );
@@ -725,8 +726,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                     style: const TextStyle(
                       color: UnlColors.gold,
                       fontSize: 12,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.1,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.0,
                     ),
                   ),
                   const SizedBox(width: 13),
@@ -739,8 +740,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 17,
-                            height: 1.18,
-                            fontWeight: FontWeight.w900,
+                            height: 1.2,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -751,7 +752,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.46),
                             fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ],
@@ -784,8 +785,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.48),
                         fontSize: 13,
-                        height: 1.42,
-                        fontWeight: FontWeight.w500,
+                        height: 1.45,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
@@ -797,8 +798,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.44),
                         fontSize: 13,
-                        height: 1.42,
-                        fontWeight: FontWeight.w500,
+                        height: 1.45,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   )
@@ -871,8 +872,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                       style: TextStyle(
                         color: UnlColors.gold.withOpacity(0.80),
                         fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -883,8 +884,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
-                        height: 1.28,
-                        fontWeight: FontWeight.w800,
+                        height: 1.32,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     if (lesson.description != null &&
@@ -897,7 +898,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.44),
                           fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
@@ -913,7 +914,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.42),
                       fontSize: 11,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   if (lesson.isCompleted) ...[
@@ -923,7 +924,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
                       style: TextStyle(
                         color: UnlColors.gold,
                         fontSize: 10,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -969,8 +970,8 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
               style: TextStyle(
                 color: Colors.white.withOpacity(0.50),
                 fontSize: 14,
-                height: 1.45,
-                fontWeight: FontWeight.w500,
+                height: 1.48,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
@@ -1003,8 +1004,9 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
@@ -1028,7 +1030,7 @@ class _StudentCourseDetailScreenState extends State<StudentCourseDetailScreen> {
             icon: const Icon(Icons.refresh_rounded),
             label: const Text(
               'Tentar novamente',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
         ],

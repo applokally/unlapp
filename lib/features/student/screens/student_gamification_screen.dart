@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -260,7 +261,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             message,
             style: const TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -410,21 +411,21 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                 style: TextStyle(
                   color: UnlColors.gold,
                   fontSize: 11,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 2.1,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.9,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 14),
           const Text(
-            'Lute pelo\nTopo.',
+            'Lute pelo Topo.',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 38,
-              height: 0.90,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -1.5,
+              fontSize: 30,
+              height: 0.98,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.75,
             ),
           ),
           const SizedBox(height: 14),
@@ -433,8 +434,8 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             style: TextStyle(
               color: Colors.white.withOpacity(0.56),
               fontSize: 14,
-              height: 1.5,
-              fontWeight: FontWeight.w500,
+              height: 1.48,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 20),
@@ -503,8 +504,8 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                   ? UnlColors.gold.withOpacity(0.82)
                   : Colors.white.withOpacity(0.50),
               fontSize: 9,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1.0,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.9,
             ),
           ),
           const SizedBox(height: 4),
@@ -512,10 +513,10 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             value,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 25,
-              height: 1,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -0.8,
+              fontSize: 23,
+              height: 1.04,
+              fontWeight: FontWeight.w700,
+              letterSpacing: -0.5,
             ),
           ),
         ],
@@ -598,7 +599,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                 style: TextStyle(
                   color: medalColor,
                   fontSize: 14,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 5),
@@ -609,7 +610,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 11,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 4),
@@ -620,7 +621,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.60),
                   fontSize: 10,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
@@ -647,8 +648,8 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             '$_progressPercent%',
             style: const TextStyle(
               color: UnlColors.gold,
-              fontSize: 17,
-              fontWeight: FontWeight.w900,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
@@ -704,7 +705,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             style: TextStyle(
               color: unlocked ? Colors.white : Colors.white.withOpacity(0.62),
               fontSize: 13,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 4),
@@ -713,7 +714,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             style: TextStyle(
               color: unlocked ? UnlColors.gold : Colors.white.withOpacity(0.38),
               fontSize: 11,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 9),
@@ -772,7 +773,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w600,
             ),
           ),
           if (reward.description?.trim().isNotEmpty == true) ...[
@@ -784,8 +785,8 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               style: TextStyle(
                 color: Colors.white.withOpacity(0.52),
                 fontSize: 13,
-                height: 1.4,
-                fontWeight: FontWeight.w500,
+                height: 1.45,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
@@ -798,7 +799,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                   style: const TextStyle(
                     color: UnlColors.gold,
                     fontSize: 15,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -814,8 +815,8 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     textStyle: const TextStyle(
                       fontSize: 11,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.35,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.3,
                     ),
                   ),
                   child: isRedeeming
@@ -890,7 +891,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               style: TextStyle(
                 color: placeColor,
                 fontSize: 13,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ),
@@ -912,7 +913,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               style: TextStyle(
                 color: isCurrentUser ? UnlColors.gold : Colors.white,
                 fontSize: 13,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -922,7 +923,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             style: TextStyle(
               color: Colors.white.withOpacity(0.62),
               fontSize: 11,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
@@ -974,7 +975,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 3),
@@ -983,7 +984,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.42),
                     fontSize: 10.5,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
@@ -995,7 +996,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
             style: const TextStyle(
               color: UnlColors.gold,
               fontSize: 14,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
@@ -1011,8 +1012,8 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
         style: TextStyle(
           color: Colors.white.withOpacity(0.46),
           fontSize: 13,
-          height: 1.45,
-          fontWeight: FontWeight.w600,
+          height: 1.48,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );
@@ -1057,8 +1058,9 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               'Não foi possível abrir sua área de gamificação.',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
+                fontSize: 17,
+                height: 1.15,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 7),
@@ -1077,7 +1079,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               icon: const Icon(Icons.refresh_rounded),
               label: const Text(
                 'Tentar novamente',
-                style: TextStyle(fontWeight: FontWeight.w900),
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -1271,9 +1273,9 @@ class _SectionContainer extends StatelessWidget {
                   title,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.35,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.2,
                   ),
                 ),
               ),
@@ -1286,8 +1288,8 @@ class _SectionContainer extends StatelessWidget {
             style: TextStyle(
               color: Colors.white.withOpacity(0.50),
               fontSize: 13,
-              height: 1.4,
-              fontWeight: FontWeight.w500,
+              height: 1.45,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 18),

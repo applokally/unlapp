@@ -1,4 +1,4 @@
-// VERSÃO: v30
+// VERSÃO: v31
 // Download validado com identificação real do formato do certificado.
 
 import 'dart:async';
@@ -647,7 +647,7 @@ class _StudentMyCertificatesScreenState
           backgroundColor: const Color(0xFF111111),
           title: const Text(
             'Excluir certificado?',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
           ),
           content: Text(
             'O certificado de ${certificate.title} deixará de aparecer na sua área.',
@@ -664,7 +664,7 @@ class _StudentMyCertificatesScreenState
               style: TextButton.styleFrom(foregroundColor: UnlColors.gold),
               child: const Text(
                 'Excluir',
-                style: TextStyle(fontWeight: FontWeight.w900),
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -780,8 +780,8 @@ class _StudentMyCertificatesScreenState
                   style: TextStyle(
                     color: UnlColors.gold,
                     fontSize: 11,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 2.1,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.9,
                   ),
                 ),
                 const SizedBox(height: 13),
@@ -789,10 +789,10 @@ class _StudentMyCertificatesScreenState
                   'Meus certificados',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 30,
-                    height: 1,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -1.1,
+                    fontSize: 26,
+                    height: 1.08,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.55,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -801,8 +801,8 @@ class _StudentMyCertificatesScreenState
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.56),
                     fontSize: 14,
-                    height: 1.5,
-                    fontWeight: FontWeight.w500,
+                    height: 1.48,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
@@ -880,7 +880,7 @@ class _StudentMyCertificatesScreenState
                   style: TextStyle(
                     color: UnlColors.gold,
                     fontSize: 11,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                     letterSpacing: 1.75,
                   ),
                 ),
@@ -889,10 +889,10 @@ class _StudentMyCertificatesScreenState
                   'Certificados disponíveis',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
-                    height: 1.1,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.55,
+                    fontSize: 20,
+                    height: 1.12,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.4,
                   ),
                 ),
               ],
@@ -907,7 +907,7 @@ class _StudentMyCertificatesScreenState
             icon: const Icon(Icons.refresh_rounded, size: 18),
             label: const Text(
               'Atualizar',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -958,10 +958,10 @@ class _StudentMyCertificatesScreenState
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 22,
+              fontSize: 20,
               height: 1.12,
-              fontWeight: FontWeight.w900,
-              letterSpacing: -0.55,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.4,
             ),
           ),
           const SizedBox(height: 10),
@@ -972,7 +972,7 @@ class _StudentMyCertificatesScreenState
               color: Colors.white.withOpacity(0.54),
               fontSize: 14,
               height: 1.5,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 24),
@@ -982,7 +982,7 @@ class _StudentMyCertificatesScreenState
             icon: const Icon(Icons.refresh_rounded),
             label: const Text(
               'Atualizar certificados',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -1022,8 +1022,9 @@ class _StudentMyCertificatesScreenState
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 21,
-              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              height: 1.12,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 9),
@@ -1046,7 +1047,7 @@ class _StudentMyCertificatesScreenState
             icon: const Icon(Icons.refresh_rounded),
             label: const Text(
               'Tentar novamente',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -1182,9 +1183,9 @@ class _CertificateMetric extends StatelessWidget {
                 value,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 21,
-                  height: 1,
-                  fontWeight: FontWeight.w900,
+                  fontSize: 20,
+                  height: 1.04,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 5),
@@ -1247,10 +1248,10 @@ class _CertificateRow extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 20,
-            height: 1.12,
-            fontWeight: FontWeight.w900,
-            letterSpacing: -0.45,
+            fontSize: 19,
+            height: 1.15,
+            fontWeight: FontWeight.w600,
+            letterSpacing: -0.3,
           ),
         ),
         subtitle: Padding(
@@ -1285,7 +1286,7 @@ class _CertificateRow extends StatelessWidget {
                     color: Colors.white.withOpacity(0.54),
                     fontSize: 13,
                     height: 1.42,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 18),
@@ -1325,7 +1326,7 @@ class _CertificateRow extends StatelessWidget {
                         icon: const Icon(Icons.link_rounded, size: 18),
                         label: const Text(
                           'Copiar link',
-                          style: TextStyle(fontWeight: FontWeight.w900),
+                          style: TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),
                       TextButton.icon(
@@ -1350,7 +1351,7 @@ class _CertificateRow extends StatelessWidget {
                             : const Icon(Icons.download_rounded, size: 18),
                         label: Text(
                           isDownloading ? 'Baixando...' : 'Baixar',
-                          style: const TextStyle(fontWeight: FontWeight.w900),
+                          style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),
                       TextButton.icon(
@@ -1378,7 +1379,7 @@ class _CertificateRow extends StatelessWidget {
                               ),
                         label: const Text(
                           'Excluir',
-                          style: TextStyle(fontWeight: FontWeight.w900),
+                          style: TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),
                     ],
@@ -1468,7 +1469,7 @@ class _CertificateBadge extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontSize: 10,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
               letterSpacing: 0.8,
             ),
           ),
@@ -1494,7 +1495,7 @@ class _CertificateDetail extends StatelessWidget {
           style: TextStyle(
             color: Colors.white.withOpacity(0.35),
             fontSize: 9.5,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1,
           ),
         ),

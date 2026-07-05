@@ -1,3 +1,4 @@
+// VERSÃO: v31
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -627,7 +628,7 @@ class _StudentCommunityScreenState extends State<StudentCommunityScreen> {
           backgroundColor: const Color(0xFF000000),
           title: const Text(
             'Denunciar publicação',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
           content: TextField(
             controller: controller,
@@ -691,7 +692,7 @@ class _StudentCommunityScreenState extends State<StudentCommunityScreen> {
           backgroundColor: const Color(0xFF000000),
           title: const Text(
             'Excluir publicação?',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
           content: const Text(
             'Esta publicação deixará de aparecer na comunidade.',
@@ -835,10 +836,10 @@ class _StudentCommunityScreenState extends State<StudentCommunityScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 25,
-              height: 1,
-              fontWeight: FontWeight.w800,
-              letterSpacing: -0.8,
+              fontSize: 24,
+              height: 1.08,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.45,
             ),
           ),
         ),
@@ -950,7 +951,8 @@ class _StudentCommunityScreenState extends State<StudentCommunityScreen> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
-                    fontWeight: FontWeight.w700,
+                    height: 1.15,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 SizedBox(height: 9),
@@ -1064,7 +1066,7 @@ class _StudentCommunityScreenState extends State<StudentCommunityScreen> {
                             style: const TextStyle(
                               color: _communityGold,
                               fontSize: 13,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                             ),
                             hint: const Text(
                               'Escolha um canal',
@@ -1128,7 +1130,7 @@ class _StudentCommunityScreenState extends State<StudentCommunityScreen> {
                         'Publicar',
                         style: TextStyle(
                           fontSize: 13,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
@@ -1181,7 +1183,7 @@ class _CommunityTabButton extends StatelessWidget {
                 style: TextStyle(
                   color: active ? Colors.white : Colors.white54,
                   fontSize: 14,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               if (count != null && count! > 0) ...[
@@ -1200,7 +1202,7 @@ class _CommunityTabButton extends StatelessWidget {
                     style: TextStyle(
                       color: active ? Colors.black : Colors.white70,
                       fontSize: 10,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -1295,7 +1297,7 @@ class _FeedPostCard extends StatelessWidget {
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               if (post.verified)
@@ -1390,7 +1392,7 @@ class _FeedPostCard extends StatelessWidget {
                       style: TextStyle(
                         color: _communityGold,
                         fontSize: 12,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -1498,7 +1500,7 @@ class _FeedPostCard extends StatelessWidget {
                                 'Enviar',
                                 style: TextStyle(
                                   fontSize: 13,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                             ),
@@ -1543,7 +1545,7 @@ class _FeedPostCard extends StatelessWidget {
                                 ),
                                 child: const Text(
                                   'Ver mais comentários',
-                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                  style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ),
@@ -1595,7 +1597,7 @@ class _PostActionButton extends StatelessWidget {
               style: TextStyle(
                 color: color,
                 fontSize: 13,
-                fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+                fontWeight: active ? FontWeight.w600 : FontWeight.w400,
               ),
             ),
           ],
@@ -1634,7 +1636,7 @@ class _CommentItem extends StatelessWidget {
                     style: const TextStyle(
                       color: Color(0xEFFFFFFF),
                       fontSize: 13,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
@@ -1702,7 +1704,7 @@ class _CommunityAvatar extends StatelessWidget {
       style: TextStyle(
         color: official ? Colors.black : Colors.white,
         fontSize: size <= 34 ? 10 : 12,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
       ),
     );
   }
