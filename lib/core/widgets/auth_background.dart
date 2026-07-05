@@ -1,3 +1,4 @@
+// VERSÃO: v30
 import 'package:flutter/material.dart';
 
 import '../theme/unl_colors.dart';
@@ -38,21 +39,16 @@ class _AuthBackgroundState extends State<AuthBackground>
       body: Stack(
         children: [
           const Positioned.fill(child: ColoredBox(color: UnlColors.black)),
-
           Positioned.fill(
             child: Opacity(
               opacity: 0.22,
               child: Image.asset(
-                'assets/images/HtbB34sFMlId7A1hElSRnTAjLsc.avif',
+                'assets/images/HtbB34sFMlId7A1hElSRnTAjLsc.png',
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.topCenter,
-                errorBuilder: (context, error, stackTrace) {
-                  return const SizedBox.shrink();
-                },
               ),
             ),
           ),
-
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -60,16 +56,15 @@ class _AuthBackgroundState extends State<AuthBackground>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.08),
-                    Colors.black.withOpacity(0.50),
-                    Colors.black.withOpacity(0.90),
+                    Colors.black.withValues(alpha: 0.08),
+                    Colors.black.withValues(alpha: 0.50),
+                    Colors.black.withValues(alpha: 0.90),
                   ],
                   stops: const [0.0, 0.48, 1.0],
                 ),
               ),
             ),
           ),
-
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -77,7 +72,7 @@ class _AuthBackgroundState extends State<AuthBackground>
                   center: const Alignment(-0.72, -0.24),
                   radius: 0.82,
                   colors: [
-                    UnlColors.gold.withOpacity(0.055),
+                    UnlColors.gold.withValues(alpha: 0.055),
                     Colors.transparent,
                   ],
                   stops: const [0.0, 1.0],
@@ -85,7 +80,6 @@ class _AuthBackgroundState extends State<AuthBackground>
               ),
             ),
           ),
-
           Positioned.fill(
             child: AnimatedBuilder(
               animation: _glowController,
@@ -101,7 +95,9 @@ class _AuthBackgroundState extends State<AuthBackground>
                       ),
                       radius: 0.74,
                       colors: [
-                        UnlColors.gold.withOpacity(0.035 + value * 0.025),
+                        UnlColors.gold.withValues(
+                          alpha: 0.035 + (value * 0.025),
+                        ),
                         Colors.transparent,
                       ],
                       stops: const [0.0, 1.0],
@@ -111,7 +107,6 @@ class _AuthBackgroundState extends State<AuthBackground>
               },
             ),
           ),
-
           Positioned.fill(child: SafeArea(child: widget.child)),
         ],
       ),

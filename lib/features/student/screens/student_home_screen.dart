@@ -1,3 +1,4 @@
+// VERSÃO: v30
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -13,6 +14,11 @@ import 'student_trail_detail_screen.dart';
 
 const Color _homeBackground = Color(0xFF050609);
 const String _websiteBaseUrl = 'https://www.universidadedelideres.com.br';
+
+/// Uma reunião deixa de ser exibida quatro horas após o seu término.
+/// Quando o ADM não informar o término, o horário de início é usado
+/// como referência, preservando a regra de quatro horas do agendamento.
+const Duration _liveVisibilityGracePeriod = Duration(hours: 4);
 
 enum _CardVariant { vertical, featured, horizontal }
 
@@ -576,7 +582,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
     if (contentType == 'live') {
       final live = livesById[contentId];
 
-      if (live == null) return null;
+      if (live == null || !_isLiveAvailableForDisplay(live)) return null;
 
       final isLive = (_text(live['status']) ?? '').toLowerCase() == 'live';
 
@@ -2301,6 +2307,32 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
       default:
         return _CardVariant.vertical;
     }
+  }
+
+  bool _isLiveAvailableForDisplay(Map<String, dynamic> live) {
+    final startsAt = _parseLiveDateTime(_text(live['starts_at']));
+    final endsAt = _parseLiveDateTime(_text(live['ends_at']));
+
+    // A data de término é a referência principal. Nas reuniões legadas,
+    // sem término cadastrado, o próprio horário marcado é a referência.
+    final referenceTime = endsAt ?? startsAt;
+
+    if (referenceTime == null) {
+      return true;
+    }
+
+    final expiresAt = referenceTime.add(_liveVisibilityGracePeriod);
+
+    // No instante exato do vencimento, a reunião já deve sair da Home.
+    return DateTime.now().isBefore(expiresAt);
+  }
+
+  DateTime? _parseLiveDateTime(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return null;
+    }
+
+    return DateTime.tryParse(value)?.toLocal();
   }
 
   String? _selectCover(Map<String, dynamic> row, _CardVariant variant) {

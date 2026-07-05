@@ -1,3 +1,4 @@
+// VERSÃO: v30
 import 'dart:async';
 import 'dart:ui';
 
@@ -1397,26 +1398,40 @@ class _StudentAppShellState extends State<StudentAppShell> {
                                         : null,
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    item.label,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: active
-                                          ? Colors.white
-                                          : Colors.white.withOpacity(0.50),
-                                      fontSize: 8.7,
-                                      fontWeight: active
-                                          ? FontWeight.w900
-                                          : FontWeight.w700,
-                                      shadows: active
-                                          ? const [
-                                              Shadow(
-                                                color: Color(0x73FFFFFF),
-                                                blurRadius: 6,
-                                              ),
-                                            ]
-                                          : null,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 2,
+                                    ),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          item.label,
+                                          maxLines: 1,
+                                          softWrap: false,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: active
+                                                ? Colors.white
+                                                : Colors.white.withOpacity(
+                                                    0.50,
+                                                  ),
+                                            fontSize: 8.7,
+                                            fontWeight: active
+                                                ? FontWeight.w900
+                                                : FontWeight.w700,
+                                            shadows: active
+                                                ? const [
+                                                    Shadow(
+                                                      color: Color(0x73FFFFFF),
+                                                      blurRadius: 6,
+                                                    ),
+                                                  ]
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],

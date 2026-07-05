@@ -1,3 +1,4 @@
+// VERSÃO: v30
 import 'package:flutter/material.dart';
 
 import 'unl_colors.dart';
@@ -23,40 +24,42 @@ class UnlTheme {
         centerTitle: false,
       ),
       textTheme: base.textTheme.copyWith(
+        // Hierarquia principal suavizada para evitar títulos visualmente
+        // excessivos, preservando leitura e destaque entre as seções.
         displayLarge: const TextStyle(
           color: UnlColors.textPrimary,
-          fontSize: 42,
-          height: 1.04,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -1.1,
+          fontSize: 38,
+          height: 1.08,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.9,
         ),
         displayMedium: const TextStyle(
           color: UnlColors.textPrimary,
-          fontSize: 34,
-          height: 1.04,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.9,
+          fontSize: 31,
+          height: 1.08,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.7,
         ),
         headlineLarge: const TextStyle(
           color: UnlColors.textPrimary,
-          fontSize: 30,
-          height: 1.04,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.8,
+          fontSize: 28,
+          height: 1.08,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.6,
         ),
         headlineMedium: const TextStyle(
           color: UnlColors.textPrimary,
-          fontSize: 24,
-          height: 1.12,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.4,
+          fontSize: 23,
+          height: 1.16,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.3,
         ),
         titleLarge: const TextStyle(
           color: UnlColors.textPrimary,
-          fontSize: 20,
-          height: 1.12,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -0.3,
+          fontSize: 19,
+          height: 1.16,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.2,
         ),
         titleMedium: const TextStyle(
           color: UnlColors.textStrong,

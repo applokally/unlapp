@@ -1,7 +1,12 @@
+// VERSÃO: v30
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 const String _websiteBaseUrl = 'https://www.universidadedelideres.com.br';
-const Duration _liveAfterEndGracePeriod = Duration(minutes: 30);
+
+/// A reunião deixa de aparecer quatro horas após o término cadastrado.
+/// Quando o ADM não informar [ends_at], o próprio horário marcado em
+/// [starts_at] é usado como referência para o limite de exibição.
+const Duration _liveAfterEndGracePeriod = Duration(hours: 4);
 const Duration _defaultLiveDuration = Duration(hours: 1);
 
 enum StudentLivePhase { scheduled, live, ended, cancelled }
@@ -72,11 +77,14 @@ class StudentLive {
   }
 
   DateTime? get accessUntil {
-    final end = automaticEndAt;
+    // Para controlar a exibição na lista, o término explícito tem
+    // prioridade. Em registros antigos sem ends_at, starts_at define o
+    // corte de quatro horas solicitado.
+    final referenceTime = endsAt ?? startsAt;
 
-    if (end == null) return null;
+    if (referenceTime == null) return null;
 
-    return end.add(_liveAfterEndGracePeriod);
+    return referenceTime.add(_liveAfterEndGracePeriod);
   }
 
   StudentLivePhase phaseAt(DateTime moment) {
@@ -111,7 +119,9 @@ class StudentLive {
 
     final limit = accessUntil;
 
-    return limit == null || !moment.toUtc().isAfter(limit.toUtc());
+    // No instante exato do limite, a reunião já deve sair da Home e de
+    // Ao Vivo. Exemplo: starts_at às 17h sem ends_at → não exibe às 21h.
+    return limit == null || moment.toUtc().isBefore(limit.toUtc());
   }
 
   bool get isZoomSdkLive {

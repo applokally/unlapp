@@ -1,7 +1,8 @@
+// VERSÃO: v30
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/config/supabase_config.dart';
 import 'core/theme/unl_theme.dart';
@@ -53,7 +54,29 @@ class UniversidadeLideresApp extends StatelessWidget {
         StudentGamificationScreen.routeName: (_) =>
             const StudentGamificationScreen(),
       },
-      home: const LoginScreen(),
+      home: const _AuthGate(),
+    );
+  }
+}
+
+class _AuthGate extends StatelessWidget {
+  const _AuthGate();
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<AuthState>(
+      stream: Supabase.instance.client.auth.onAuthStateChange,
+      builder: (context, snapshot) {
+        final session =
+            snapshot.data?.session ??
+            Supabase.instance.client.auth.currentSession;
+
+        if (session == null) {
+          return const LoginScreen();
+        }
+
+        return const StudentHomeScreen();
+      },
     );
   }
 }

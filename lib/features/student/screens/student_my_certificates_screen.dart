@@ -1,5 +1,5 @@
-// VERSÃO: v23
-// Download validado e salvamento nativo multiplataforma (Android e iOS).
+// VERSÃO: v30
+// Download validado com identificação real do formato do certificado.
 
 import 'dart:async';
 import 'dart:convert';
@@ -391,6 +391,7 @@ class _StudentMyCertificatesScreenState
       final responseMimeType =
           response.headers.contentType?.mimeType.toLowerCase() ?? '';
       final extension = _certificateExtension(
+        bytes: bytes,
         mimeType: responseMimeType,
         sourceUri: downloadUri,
       );
@@ -474,31 +475,23 @@ class _StudentMyCertificatesScreenState
       return false;
     }
 
-    if (extension == 'pdf') {
-      return bytes.length >= 5 &&
-          bytes[0] == 0x25 &&
-          bytes[1] == 0x50 &&
-          bytes[2] == 0x44 &&
-          bytes[3] == 0x46 &&
-          bytes[4] == 0x2D;
-    }
-
-    if (extension == 'svg') {
-      final previewLength = bytes.length < 512 ? bytes.length : 512;
-      final preview = utf8
-          .decode(bytes.sublist(0, previewLength), allowMalformed: true)
-          .toLowerCase();
-
-      return preview.contains('<svg') || preview.contains('<?xml');
-    }
-
-    return bytes.length >= 16;
+    return _certificateExtensionFromPayload(bytes) == extension;
   }
 
   String _certificateExtension({
+    required Uint8List bytes,
     required String? mimeType,
     required Uri sourceUri,
   }) {
+    // A assinatura dos bytes é a fonte de verdade. Alguns links privados do
+    // Supabase não carregam extensão na URL e podem responder como
+    // application/octet-stream, o que antes fazia uma imagem PNG ser salva
+    // com o sufixo .pdf no iPhone.
+    final payloadExtension = _certificateExtensionFromPayload(bytes);
+    if (payloadExtension != null) {
+      return payloadExtension;
+    }
+
     switch (mimeType?.toLowerCase()) {
       case 'application/pdf':
         return 'pdf';
@@ -520,12 +513,90 @@ class _StudentMyCertificatesScreenState
     if (lastDot != -1 && lastDot < fileName.length - 1) {
       final extension = fileName.substring(lastDot + 1).toLowerCase();
 
-      if (RegExp(r'^[a-z0-9]{2,5}$').hasMatch(extension)) {
-        return extension;
+      if (_isSupportedCertificateExtension(extension)) {
+        return extension == 'jpeg' ? 'jpg' : extension;
       }
     }
 
-    return 'pdf';
+    // Não presumimos PDF quando o tipo real não pôde ser identificado.
+    // Isso evita salvar uma imagem como .pdf e abrir no aplicativo errado.
+    throw const FormatException('Formato de certificado não reconhecido.');
+  }
+
+  String? _certificateExtensionFromPayload(Uint8List bytes) {
+    if (_hasBytes(bytes, const [0x25, 0x50, 0x44, 0x46, 0x2D])) {
+      return 'pdf';
+    }
+
+    if (_hasBytes(bytes, const [
+      0x89,
+      0x50,
+      0x4E,
+      0x47,
+      0x0D,
+      0x0A,
+      0x1A,
+      0x0A,
+    ])) {
+      return 'png';
+    }
+
+    if (bytes.length >= 3 &&
+        bytes[0] == 0xFF &&
+        bytes[1] == 0xD8 &&
+        bytes[2] == 0xFF) {
+      return 'jpg';
+    }
+
+    if (bytes.length >= 12 &&
+        bytes[0] == 0x52 &&
+        bytes[1] == 0x49 &&
+        bytes[2] == 0x46 &&
+        bytes[3] == 0x46 &&
+        bytes[8] == 0x57 &&
+        bytes[9] == 0x45 &&
+        bytes[10] == 0x42 &&
+        bytes[11] == 0x50) {
+      return 'webp';
+    }
+
+    final previewLength = bytes.length < 1024 ? bytes.length : 1024;
+    final preview = utf8
+        .decode(bytes.sublist(0, previewLength), allowMalformed: true)
+        .trimLeft()
+        .toLowerCase();
+
+    if (preview.startsWith('<svg') ||
+        preview.startsWith('<?xml') && preview.contains('<svg')) {
+      return 'svg';
+    }
+
+    return null;
+  }
+
+  bool _hasBytes(Uint8List bytes, List<int> expected) {
+    if (bytes.length < expected.length) {
+      return false;
+    }
+
+    for (var index = 0; index < expected.length; index++) {
+      if (bytes[index] != expected[index]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  bool _isSupportedCertificateExtension(String extension) {
+    return const {
+      'pdf',
+      'png',
+      'jpg',
+      'jpeg',
+      'svg',
+      'webp',
+    }.contains(extension);
   }
 
   String _certificateMimeTypeForExtension(String extension) {
