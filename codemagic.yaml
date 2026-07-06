@@ -1,19 +1,9 @@
-# VERSÃO: v31
-# Universidade de Líderes — TestFlight interno (iPhone físico)
-#
-# Pré-requisitos configurados no Codemagic:
-# 1. Integração Apple Developer Portal com o nome:
-#    Codemagic Lokally
-# 2. Grupo de variáveis seguro com o nome:
-#    universidade_lideres_testflight
-# 3. Dentro do grupo, APP_STORE_APPLE_ID com o Apple ID numérico
-#    do registro do app no App Store Connect.
-#
-# Não coloque certificados, chaves .p8, senhas ou IDs sensíveis neste arquivo.
+# VERSÃO: v32
+# Universidade de Líderes — distribuição App Store e TestFlight
 
 workflows:
-  ios-testflight-internal:
-    name: Universidade de Líderes — TestFlight interno
+  ios-app-store:
+    name: Universidade de Líderes — App Store
     max_build_duration: 120
     instance_type: mac_mini_m2
 
@@ -33,10 +23,9 @@ workflows:
         bundle_identifier: br.com.universidadedelideres.universidadeLideresApp
 
     scripts:
-      - name: Configurar assinatura iOS para TestFlight interno
+      - name: Configurar assinatura iOS para App Store
         script: |
-          xcode-project use-profiles \
-            --custom-export-options='{"testFlightInternalTestingOnly": true}'
+          xcode-project use-profiles
 
       - name: Instalar dependências Flutter
         script: flutter pub get
@@ -51,10 +40,9 @@ workflows:
       - name: Executar testes Flutter
         script: flutter test
 
-      - name: Gerar IPA para TestFlight
+      - name: Gerar IPA para App Store
         script: |
           flutter build ipa --release \
-            --build-number="$PROJECT_BUILD_NUMBER" \
             --export-options-plist=/Users/builder/export_options.plist
 
     artifacts:
