@@ -3,7 +3,7 @@ name: universidade_lideres_app
 description: "Aplicativo nativo da Universidade de Líderes."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+8
 
 environment:
   sdk: ^3.10.7
