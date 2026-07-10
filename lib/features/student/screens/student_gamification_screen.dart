@@ -430,7 +430,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
           ),
           const SizedBox(height: 14),
           Text(
-            'Assista aulas, participe e transforme suas conquistas em pontos e recompensas.',
+            'Assista aulas, participe e acompanhe sua evolução por pontos.',
             style: TextStyle(
               color: Colors.white.withOpacity(0.56),
               fontSize: 14,
@@ -444,7 +444,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               Expanded(
                 child: _buildHeroStat(
                   icon: Icons.bolt_rounded,
-                  label: 'Saldo atual',
+                  label: 'Pontos atuais',
                   value: _formatPoints(_balance),
                   highlighted: true,
                 ),
@@ -453,7 +453,7 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
               Expanded(
                 child: _buildHeroStat(
                   icon: Icons.my_location_rounded,
-                  label: 'Seu rank',
+                  label: 'Sua posição',
                   value: _myPosition > 0 ? '#$_myPosition' : '—',
                   highlighted: false,
                 ),
@@ -734,12 +734,12 @@ class _StudentGamificationScreenState extends State<StudentGamificationScreen> {
 
   Widget _buildRewardsSection() {
     return _SectionContainer(
-      title: 'Recompensas',
-      icon: Icons.card_giftcard_rounded,
-      subtitle: 'Troque seus pontos por benefícios especiais.',
+      title: 'Reconhecimentos',
+      icon: Icons.emoji_events_rounded,
+      subtitle: 'Reconhecimentos da jornada de aprendizagem.',
       child: _rewards.isEmpty
           ? _buildEmptyInline(
-              'Novas recompensas serão disponibilizadas em breve.',
+              'Novos reconhecimentos serão disponibilizados em breve.',
             )
           : ListView.separated(
               shrinkWrap: true,

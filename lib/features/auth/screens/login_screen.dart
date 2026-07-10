@@ -12,7 +12,6 @@ import '../widgets/auth_link_button.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/auth_message_box.dart';
 import 'forgot_password_screen.dart';
-import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -90,12 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
       MaterialPageRoute<void>(
         builder: (context) => const ForgotPasswordScreen(),
       ),
-    );
-  }
-
-  void _openRegister() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (context) => const RegisterScreen()),
     );
   }
 
@@ -224,25 +217,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white.withOpacity(0.08),
                         ),
                         const SizedBox(height: 18),
-                        Wrap(
-                          spacing: 6,
-                          runSpacing: 8,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            const Text(
-                              'Ainda não tem acesso?',
-                              style: TextStyle(
-                                color: UnlColors.textSecondary,
-                                fontSize: 15,
-                                height: 1.3,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            AuthLinkButton(
-                              label: 'Criar cadastro',
-                              onTap: _openRegister,
-                            ),
-                          ],
+                        const Text(
+                          'Acesso exclusivo para membros aprovados pela Universidade de Líderes.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: UnlColors.textSecondary,
+                            fontSize: 15,
+                            height: 1.35,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),
