@@ -601,7 +601,7 @@ class _StudentPersonalDataScreenState extends State<StudentPersonalDataScreen> {
               const SizedBox(width: 9),
               Expanded(
                 child: Text(
-                  'Acesso $_accessLevel',
+                  'Nível profissional: $_accessLevel',
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.72),
                     fontSize: 13,

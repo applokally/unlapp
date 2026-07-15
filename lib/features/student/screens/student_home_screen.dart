@@ -535,7 +535,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         category: 'Trilha',
         duration: _isTrue(trail['is_featured'])
             ? 'Em destaque'
-            : 'Conteúdo liberado',
+            : 'Conteúdo disponível',
         level: 'Disponível para você',
         badge:
             badgeOverride ??
@@ -567,7 +567,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         category: 'Curso',
         duration: _isTrue(course['is_featured'])
             ? 'Em destaque'
-            : 'Conteúdo liberado',
+            : 'Conteúdo disponível',
         level: 'Disponível para você',
         badge:
             badgeOverride ??
@@ -629,7 +629,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
             'Conteúdo disponível para você.',
         category: 'Aula',
         duration: _formatDuration(lesson['duration_sec']),
-        level: 'Aula liberada',
+        level: 'Aula disponível',
         badge: badgeOverride,
         imageUrl: _resolveAssetUrl(
           imageOverride ?? _text(lesson['primary_asset_path']),

@@ -218,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 18),
                         const Text(
-                          'Acesso exclusivo para membros aprovados pela Universidade de Líderes.',
+                          'Faça login',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: UnlColors.textSecondary,
